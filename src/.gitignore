@@ -5,7 +5,6 @@ sox_sample_test.exe
 example?
 example?.exe
 soxconfig.h.in
-soxconfig.h
 .deps
 stamp-h1
 .libs
