@@ -566,7 +566,7 @@ void lsx_plot_fir(double * h, int num_points, sox_rate_t rate, sox_plot_t type, 
 }
 
 #if HAVE_FENV_H
-  #include <fenv.h>
+  //#include <fenv.h>
   #if defined FE_INVALID
     #if HAVE_LRINT && LONG_MAX == 2147483647
       #define lrint32 lrint

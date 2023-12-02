@@ -6,9 +6,10 @@ set(CMAKE_CXX_STANDARD 17)
 #加载自定义模块
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-
+#set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_SYSTEM_NAME Linux)
-#set(CMAKE_SYSTEM_PROCESSOR arm)
+set(CMAKE_SYSTEM_PROCESSOR arm)
 
 #set(SDK_DIR  "/data/works/rp_sdk/rv1106-20230626")
 set(SDK_DIR  "/works/rv1106-20230626")
@@ -27,6 +28,9 @@ if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm")
     include_directories("${SDK_DIR}/media/out/include/")
 
     LINK_DIRECTORIES(${SDK_DIR}/media/out/root/usr/lib)
+    if(${CMAKE_BUILD_TYPE} MATCHES "Release")
+        add_compile_options(-O3 -mfpu=neon -mfloat-abi=hard)
+    endif ()
 else ()
     # x86
     SET(CMAKE_C_COMPILER   gcc)
@@ -43,13 +47,13 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(CMAKE_C_FLAGS "${C_FLAGS} -w")
 
 
-#set(CMAKE_BUILD_TYPE "Debug")
-set(CMAKE_BUILD_TYPE "Release")
+
 
 if(${CMAKE_BUILD_TYPE} MATCHES "Release")
     message(STATUS "Release版本")
     set(BuildType "Release")
-
+    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -s")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
 else()
     set(BuildType "Debug")
     message(STATUS "Debug版本")

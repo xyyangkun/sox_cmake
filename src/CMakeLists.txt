@@ -38,6 +38,22 @@ set_target_properties(rksox_shared PROPERTIES  COMPILE_FLAGS "-DUSE_UVC -DUSE_UA
 
 
 ###################################################################################
+# sox
+add_executable(sox sox.c )
+target_link_libraries(sox  rksox_static ${LINK_LIB_LIST})
+#编译目标设置-DTEST宏
+#https://stackoverflow.com/questions/5096881/does-set-target-properties-in-cmake-override-cmake-cxx-flags
+set_target_properties(sox PROPERTIES  COMPILE_FLAGS "-DTEST") # ok
+add_custom_command(TARGET sox
+        POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        "../../release/linux/${BuildType}/sox"
+        "/nfs/rv1106/switch/"
+        COMMAND ${CMAKE_COMMAND} -E   md5sum "../../release/linux/${BuildType}/sox"
+        )
+
+
+###################################################################################
 # sox example code 0
 add_executable(example0 example0.c )
 target_link_libraries(example0  rksox_shared ${LINK_LIB_LIST})
@@ -93,3 +109,11 @@ target_link_libraries(example6 rksox_shared ${LINK_LIB_LIST})
 #https://stackoverflow.com/questions/5096881/does-set-target-properties-in-cmake-override-cmake-cxx-flags
 set_target_properties(example6 PROPERTIES  COMPILE_FLAGS "-DTEST") # ok
 
+
+###################################################################################
+# sox example code yk test
+add_executable(yk_test_memstream yk_test_memstream.cpp)
+target_link_libraries(yk_test_memstream rksox_shared ${LINK_LIB_LIST})
+#编译目标设置-DTEST宏
+#https://stackoverflow.com/questions/5096881/does-set-target-properties-in-cmake-override-cmake-cxx-flags
+set_target_properties(yk_test_memstream PROPERTIES  COMPILE_FLAGS "-DTEST") # ok
