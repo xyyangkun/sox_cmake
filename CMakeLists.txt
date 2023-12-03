@@ -6,10 +6,10 @@ set(CMAKE_CXX_STANDARD 17)
 #加载自定义模块
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-set(CMAKE_BUILD_TYPE "Debug")
-#set(CMAKE_BUILD_TYPE "Release")
+#set(CMAKE_BUILD_TYPE "Debug")
+set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_SYSTEM_NAME Linux)
-#set(CMAKE_SYSTEM_PROCESSOR arm)
+set(CMAKE_SYSTEM_PROCESSOR arm)
 
 #set(SDK_DIR  "/data/works/rp_sdk/rv1106-20230626")
 set(SDK_DIR  "/works/rv1106-20230626")
