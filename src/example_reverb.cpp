@@ -1,5 +1,6 @@
 //
 // Created by xy on 2023/12/3.
+// debug param: example_reverb /home/xy/output.wav /home/xy/out_eq.wav
 //
 #include "sox.h"
 #include <stdlib.h>
@@ -28,23 +29,15 @@ int main(int argc, char * argv[])
     assert(sox_add_effect(chain, e, &in->signal, &in->signal) == SOX_SUCCESS);
     free(e);
 
-#if 0
-    //创建第一段equalizer效果器
-    e = sox_create_effect(sox_find_effect("equalizer"));
-    args[0] = "100";
-    args[1] = "1.5q";
-    args[2] = "12";
-    assert(sox_effect_options(e, 3, args) == SOX_SUCCESS);
-    //增加效果到效果链
-    assert(sox_add_effect(chain, e, &in->signal, &in->signal) == SOX_SUCCESS);
-    free(e);
-#endif
-    //创建第二段equalizer效果器
-    e = sox_create_effect(sox_find_effect("equalizer"));
-    args[0] = "1000";
-    args[1] = "2.0q";
-    args[2] = "-12";
-    assert(sox_effect_options(e, 3, args) == SOX_SUCCESS);
+    // 添加一个reverb
+    e = sox_create_effect(sox_find_effect("reverb"));
+    args[0] = (char*)"1";      // reverberance 0~100
+    args[1] = (char*)"100";    // hf_damping 0~100
+    args[2] = (char*)"1";      // room_scale 0~100
+    args[3] = (char*)"1";      // stere_depth 0~100
+    args[4] = (char*)"10";    // pre_delay_ms 0~500
+    args[5] = (char*)"10";    // web_gain_db -10~10
+    assert(sox_effect_options(e, 6, args) == SOX_SUCCESS);
     //增加效果到效果链
     assert(sox_add_effect(chain, e, &in->signal, &in->signal) == SOX_SUCCESS);
     free(e);

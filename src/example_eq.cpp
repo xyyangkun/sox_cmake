@@ -1,5 +1,6 @@
 //
 // Created by xy on 2023/12/3.
+// debug param: example_eq /home/xy/output.wav /home/xy/out_eq.wav
 //
 #include "sox.h"
 #include <stdlib.h>
