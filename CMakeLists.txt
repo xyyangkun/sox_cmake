@@ -24,8 +24,7 @@ if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm")
     # arm
     SET(CMAKE_C_COMPILER ${TOOLCHAIN_DIR}/bin/arm-rockchip830-linux-uclibcgnueabihf-gcc)
     SET(CMAKE_CXX_COMPILER ${TOOLCHAIN_DIR}/bin/arm-rockchip830-linux-uclibcgnueabihf-g++)
-    include_directories("${TOOLCHAIN_DIR}/arm-buildroot-linux-gnueabihf/sysroot/usr/include")
-    include_directories("${SDK_DIR}/media/out/include/")
+    include_directories("${SDK_DIR}/media/alsa-lib/out/include/")
 
     LINK_DIRECTORIES(${SDK_DIR}/media/out/root/usr/lib)
     if(${CMAKE_BUILD_TYPE} MATCHES "Release")
