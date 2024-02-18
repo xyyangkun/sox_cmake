@@ -16,8 +16,13 @@ int main(int argc, char * argv[])
     //在使用sox前调用，初始化全局参数
     assert(sox_init() == SOX_SUCCESS);
 
+    char *filetype = NULL;
+
+    // argv[1] = (char *)"hw:0,0";
+    // filetype = (char *)"alsa";
+
     //打开输入文件
-    assert(in = sox_open_read(argv[1], NULL, NULL, NULL));
+    assert(in = sox_open_read(argv[1], NULL, NULL, filetype));
     //打开输出文件，必须制定输出信号特征(第二个参数)，这里简单演示，使用in一致的信号特征
     assert(out = sox_open_write(argv[2], &in->signal, NULL, NULL, NULL, NULL));
     //创建一个效果链
@@ -42,9 +47,9 @@ int main(int argc, char * argv[])
 #endif
     //创建第二段equalizer效果器
     e = sox_create_effect(sox_find_effect("equalizer"));
-    args[0] = "1000";
-    args[1] = "2.0q";
-    args[2] = "-12";
+    args[0] = (char*)"1000";
+    args[1] = (char*)"2.0q";
+    args[2] = (char*)"-12";
     assert(sox_effect_options(e, 3, args) == SOX_SUCCESS);
     //增加效果到效果链
     assert(sox_add_effect(chain, e, &in->signal, &in->signal) == SOX_SUCCESS);

@@ -15,9 +15,13 @@ int main(int argc, char * argv[])
     char * args[10];
     //在使用sox前调用，初始化全局参数
     assert(sox_init() == SOX_SUCCESS);
+    char *filetype =  NULL;
+
+    // filetype = "alsa";
+    //argv[1] = (char *)"hw:0,0";
 
     //打开输入文件
-    assert(in = sox_open_read(argv[1], NULL, NULL, NULL));
+    assert(in = sox_open_read(argv[1], NULL, NULL, filetype));
     //打开输出文件，必须制定输出信号特征(第二个参数)，这里简单演示，使用in一致的信号特征
     assert(out = sox_open_write(argv[2], &in->signal, NULL, NULL, NULL, NULL));
     //创建一个效果链
