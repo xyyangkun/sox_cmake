@@ -134,3 +134,11 @@ target_link_libraries(example_reverb rksox_shared ${LINK_LIB_LIST})
 #https://stackoverflow.com/questions/5096881/does-set-target-properties-in-cmake-override-cmake-cxx-flags
 set_target_properties(example_reverb PROPERTIES  COMPILE_FLAGS "-DTEST") # ok
 
+###################################################################################
+# sox example code yk test
+add_executable(example_compand example_compand.cpp)
+target_link_libraries(example_compand rksox_shared ${LINK_LIB_LIST})
+#编译目标设置-DTEST宏
+#https://stackoverflow.com/questions/5096881/does-set-target-properties-in-cmake-override-cmake-cxx-flags
+set_target_properties(example_compand PROPERTIES  COMPILE_FLAGS "-DTEST") # ok
+
